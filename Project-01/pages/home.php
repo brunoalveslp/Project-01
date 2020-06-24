@@ -1,4 +1,9 @@
 <section class="main-banner">
+
+    <div class="banner-slider" style="background-image: url('<?php echo INCLUDE_PATH;?>images/city1.jpg');"></div>
+    <div class="banner-slider" style="background-image: url('<?php echo INCLUDE_PATH;?>images/city2.jpg');"></div>
+    <div class="banner-slider" style="background-image: url('<?php echo INCLUDE_PATH;?>images/city3.jpg');"></div>
+
         <div class="overlay"></div>
         <div class="center">
         <form action="">
@@ -6,10 +11,13 @@
             <input type="email" name="email" required>
             <input type="submit" name="action" value="Cadastrar!">
         </form>
+
+        <div class="bullets"></div>
+        
         </div><!--center-->
     </section><!--main banner-->
 
-    <section class="author-description">
+    <section id="about" class="author-description">
         <div class="center author">
             <div class="w50 left">
                 <h2>Bruno Alves</h2>
@@ -79,7 +87,7 @@
                     <p class="author-name">Lorem Ipsum</p>
                 </div>  
             </div><!--w50-->
-            <div class="w50 right">
+            <div id="services" class="w50 right">
                 <h2>Serviços</h2>
                 <ul>
                     <li>

@@ -95,18 +95,28 @@ header {
 .main-banner {
     width: 100%;
     height: 600px;
-    background: url("../images/city.jpg") no-repeat;
-    background-size: cover;
     position: relative;
+}
+
+.banner-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
 }
 
 .overlay {
     position: absolute;
     left: 0;
+    z-index: 2;
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(78, 78, 78, 0.514);
+    background-color: rgba(78, 78, 78, 0.397);
 }
 
 section.main-banner form {
@@ -159,6 +169,7 @@ section.main-banner form {
 }
 
 .author-description {
+    margin: 40px 0;
     width: 100%;
     color: #444;
     display: flex;
@@ -269,6 +280,28 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+.bullets {
+    z-index: 5;
+    position: absolute;
+    left: 50%;
+    bottom: 15px;
+    transform: translateX(-50%);
+}
+
+.bullets span {
+    margin: 0 5px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #444;
+    cursor: pointer;
+}
+
+.bullets span.active-slider {
+    background-color: white;
 }
 
 
