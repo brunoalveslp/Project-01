@@ -8,16 +8,17 @@
 
         
 
-        <form >
+        <form method="post">
             <h2>Contato</h2>
         <label for="name">Nome Completo</label>
         <input type="text" name="name" placeholder="Nome Completo" required>
         <label for="email">E-mail</label>
         <input type="text" name="email" placeholder="E-mail" required>
-        <label for="telefone">Telefone</label>
-        <input type="text" name="telefone" placeholder="Telefone" required>
-        <textarea name="mensagem" placeholder="Mensagem"></textarea>
+        <label for="phone">Telefone</label>
+        <input type="text" name="phone" placeholder="Telefone" required>
+        <textarea name="message" placeholder="Mensagem"></textarea>
         <input type="submit" value="Enviar" name="action" >
+        <input type="hidden" name="id" value="contact_sent">
         
         </form>
     

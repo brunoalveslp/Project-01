@@ -21,6 +21,65 @@
     <title>Project-01</title>
 </head>
 <body>
+<?php  
+
+    if(isset($_POST['action']) && $_POST['id'] == 'email_sent')
+    {
+        if($_POST['email'] != '')
+        {
+            $email = $_POST['email'];
+            if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                //tudo certo
+                $mail = new Email('smtp.gmail.com','brunoalvesvoice@gmail.com','Bru456123','project-01');
+                $msg = "<hr>Novo Email Cadastrado!</hr>$email";
+                $mail->addAdress('brunoalvesvoice@gmail.com','project');
+                $info = array('subject'=>'New email registered','body'=>$msg);
+                $mail->formatEmail($info);
+                if($mail->sendEmail())
+                {
+                    echo '<script>alert("E-mail Cadastrado!")</script>';
+                }else 
+                {
+                    echo '<script>alert("Algo deu Errado!")</script>';
+                }
+            }else 
+            {
+                echo '<script>alert("E-mail Invalido!")</script>';
+            }
+        }
+    }else if(isset($_POST['action']) && $_POST['id'] == 'contact_sent')
+    {
+        // $name = $_POST['name'];
+        // $mail = $_POST['email'];
+        // $phone = $_POST['phone'];
+        // $message = $_POST['message'];
+        $mail = new Email('smtp.gmail.com','brunoalvesvoice@gmail.com','Bru456123','project-01');
+
+        $msg = '';
+        foreach($_POST as $key =>$value)
+        {
+            $msg.=ucfirst($key).": ".$value;
+            $msg.='<hr>';
+        }
+        $mail->addAdress('brunoalvesvoice@gmail.com','project');
+        $info = array('subject'=>'New Contact!','body'=>$msg);
+        $mail->formatEmail($info);
+        if($mail->sendEmail())
+        {
+            echo '<script>alert("Cotato enviado com sucesso!")</script>';
+        }else 
+        {
+            echo '<script>alert("Algo deu Errado!")</script>';
+        }
+
+    }
+    else 
+    {
+        echo '<script>alert("Campos vazios não são permitidos!"")</script>';
+    }
+
+?>
+
     <header>
         <div class="logo"><a href="<?php echo INCLUDE_PATH;?>">Logomarca</a></div>
             <nav class="desktop">

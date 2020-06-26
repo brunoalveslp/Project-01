@@ -14,13 +14,13 @@ $( ()=>{
         $('.banner-slider').eq(0).show();
 
         for(let i = 0; i < maxSlider+1; i++){
-            let content = $('.bullets').html();
+            var content = $('.bullets').html();
 
             if(i == 0)
                 content+='<span class="active-slider"></span>';
             else
                 content+='<span></span>';
-
+            
             $('.bullets').html(content);
         }
     }
@@ -30,13 +30,15 @@ $( ()=>{
             $('.banner-slider').eq(currentSlide).stop().fadeOut(2000);
 
             currentSlide++;
+
             if(currentSlide > maxSlider)
                 currentSlide = 0;
+            
 
             $('.banner-slider').eq(currentSlide).stop().fadeIn(2000);
 
-            $('.bullets span').removeClass();
-            
+            $('.bullets span').removeClass('active-slider');
+            $('.bullets span').eq(currentSlide).addClass('active-slider');
 
         },3000);
     }

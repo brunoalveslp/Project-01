@@ -6,9 +6,13 @@
 
         <div class="overlay"></div>
         <div class="center">
-        <form action="">
+
+       
+
+        <form method="post">
             <h2>Qual o seu melhor E-mail?</h2>
             <input type="email" name="email" required>
+            <input type="hidden" name="id" value="email_sent">
             <input type="submit" name="action" value="Cadastrar!">
         </form>
 
