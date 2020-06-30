@@ -1,5 +1,7 @@
 
 <?php include('config.php'); 
+    Site::UpdateUsers();
+    Site::Counter();
 
     $url = isset($_GET['url']) ? $_GET['url'] : 'home';
 ?>

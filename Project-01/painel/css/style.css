@@ -46,14 +46,21 @@ html, body {
 
 /* error box */
 
-.erro {
-    width: 100%;
-    padding: 4px 2%;
-    
-    text-align: center;
-    background-color: rgba(255, 66, 66, 0.6);
+.form-group-login {
+    width: auto;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
 
-.erro h2 {
-    color: aliceblue;
+.form-group-login input[type=checkbox]{
+    width: 10px;
+
+}
+
+.form-group-login label{
+	font-size: 15px;
+    padding: 10px;
+	font-weight: 300;
+	color: black;
 }

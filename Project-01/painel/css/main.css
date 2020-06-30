@@ -1,5 +1,19 @@
 
+
+.menu-active{
+	background: #3a4b51;
+}
+
+.menu-active::before{
+	/*
+		Adicionar Seta para qd estiver selecionado.
+	*/
+}
+
+
 .clear{clear:both;}
+
+body { overflow-x: hidden;}
 
 .center{
 	padding:0 2%;margin:0 auto;}
@@ -67,6 +81,7 @@ header{
 
 
 .items-menu{
+	margin-bottom: 30px;
 	margin-top: 30px;
 }
 
@@ -114,7 +129,8 @@ div.usuario{
 	color: #2F3D42;
 }
 
-.imagem-usuario{
+.usuario{
+	margin-left: 15%;
 	display: inline-block;
 	width: 130px;
 	height: 130px;
@@ -123,7 +139,7 @@ div.usuario{
 	border: 3px solid #2F3D42;
 }
 
-.imagem-usuario img{
+.usuario img{
 	position: absolute;
 	left: 0;
 	top: 0;
@@ -147,12 +163,10 @@ div.usuario{
 
 .w100{
 	width: calc(100% - 100px);
-	background-color: #E4E !important;
 }
 
 .w50{
 	width: calc(50% - 100px);
-	background-color: #E05C4E !important;
 }
 
 .left{
@@ -160,15 +174,12 @@ div.usuario{
 }
 
 .right{
-	left: -10%;
 	float: right;
 }
 
 .box-content{
 	background: white;
 	padding: 30px;
-	
-	margin: 25px 0 0 0;
 }
 
 .box-content h2{
@@ -253,7 +264,7 @@ a.btn.order{background: #0091ea;}
 .box-metrica-single{
 	float: left;
 	position: relative;
-	width: 33.3%;
+	width: 30%;
 	background: #F4B03E;
 	border: 5px solid white;
 }
@@ -378,7 +389,23 @@ a.btn.order{background: #0091ea;}
 	border: 0;
 }
 
+.erro {
+    width: 100%;
+    padding: 4px 2%;
+    
+    text-align: center;
+    background-color: rgba(255, 66, 66, 0.6);
+}
+
+.erro h2 {
+    color: aliceblue;
+}
 /*Box de alerta!*/
+
+
+
+/*Menu selecionado*/
+
 
 .box-alert{
 	width: 100%;
@@ -387,38 +414,18 @@ a.btn.order{background: #0091ea;}
 }
 
 .sucesso{
+	text-align: center;
+	padding: 20px;
 	background: #a5d6a7;
 	color: white;
+	
 }
 
 .erro{
+	text-align: center;
+	padding: 20px;
 	background: #F75353;
 	color: white;
-}
-
-/*Menu selecionado*/
-.menu-active{
-	background: #3a4b51;
-}
-
-.menu-active::before{
-	/*
-		Adicionar Seta para qd estiver selecionado.
-	*/
-}
-
-
-
-.form-group-login label{
-	font-size: 13px;
-	padding-right: 6px;
-	font-weight: 300;
-	color: black;
-}
-
-form .form-group-login:nth-of-type(2){
-	position: relative;
-	top: 10px;
 }
 
 @media screen and (max-width: 1024px){
