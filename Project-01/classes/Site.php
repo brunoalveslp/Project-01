@@ -5,7 +5,7 @@
         {
             if(isset($_SESSION['online']))
             {
-                $token = $_SESSION['online'];
+                $token = $_SERVER['REMOTE_ADDR'];
                 $horarioAtual = date('y-m-d H:i:s');
                 $check = MySql::Connect()->prepare("SELECT `id` FROM `tb_admin_online` WHERE token = ?");
                 $check->execute(array($token));
@@ -14,7 +14,7 @@
                     $sql->execute(array($horarioAtual,$token));
                 }else {
                     $ip = $_SERVER['REMOTE_ADDR'];
-                    $token = $_SESSION['online'];
+                    $token = $_SERVER['REMOTE_ADDR'];
                     $horarioAtual = date('y-m-d H:i:s');
                     $sql = MySql::Connect()->prepare("INSERT INTO `tb_admin_online` VALUES (null,?,?,?)");
                     $sql->execute(array($ip,$horarioAtual,$token));
@@ -22,7 +22,7 @@
             }
             else {
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $token = $_SESSION['online'];
+                $token = $_SERVER['REMOTE_ADDR'];
                 $horarioAtual = date('y-m-d H:i:s');
                 $_SESSION['online'] = uniqid();
                 $sql = MySql::Connect()->prepare("INSERT INTO `tb_admin_online` VALUES (null,?,?,?)");

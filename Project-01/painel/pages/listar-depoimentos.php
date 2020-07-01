@@ -2,9 +2,9 @@
 	if(isset($_GET['excluir'])){
 		$idExcluir = intval($_GET['excluir']);
 		Painel::Delete('tb_site_depoimentos',$idExcluir);
-		/Painel::Redirect(INCLUDE_PATH_PAINEL.'listar-depoimentos');
+		Painel::Redirect(INCLUDE_PATH_PAINEL.'listar-depoimentos');
 	}else if(isset($_GET['order']) && isset($_GET['id'])){
-		Painel::orderItem('tb_site_depoimentos',$_GET['order'],$_GET['id']);
+		Painel::OrderItem('tb_site_depoimentos',$_GET['order'],$_GET['id']);
 	}
 
 	$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
@@ -20,10 +20,10 @@
 		<tr>
 			<td>Nome</td>
 			<td>Data</td>
-			<td>#</td>
-			<td>#</td>
-			<td>#</td>
-			<td>#</td>
+			<td>Editar</td>
+			<td>Excluir</td>
+			<td>Ordenar</td>
+			<td>Ordenar</td>
 		</tr>
 
 		<?php

@@ -21,7 +21,8 @@
 						Painel::UploadFile($img);
 						if(User::RefreshUser($name,$pass,$img))
 						{
-							Painel::Alert('success','Edição Realizada Com Sucesso<br>Recarregue a pagina para a mudança ser visualizada!');
+							Painel::Alert('success','Edição Realizada Com Sucesso');
+							header('refresh: 1');
 						} else
 						{
 							Painel::Alert('error','Formato Invalido!');

@@ -17,6 +17,7 @@
     const INCLUDE_PATH_PAINEL = INCLUDE_PATH.'painel/';
 
     const BASE_DIR_PAINEL = __DIR__.'/painel/';
+    const SLIDE_PATH = INCLUDE_PATH.'images/';
 
     //database connection
     const HOST = 'localhost';

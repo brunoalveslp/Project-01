@@ -67,7 +67,17 @@ $(()=>{
 
     $('[actionBtn=delete]').click(()=>{
         let txt;
-        let r = confirm("Deseja ecluir o registro!");
+        let r = confirm("Deseja ecluir o registro?");
+        if (r == true) {
+            return true;
+        } else {
+            return false;
+        } 
+    })
+
+    $('[actionBtn=edit]').click(()=>{
+        let txt;
+        let r = confirm("Deseja Editar o registro?");
         if (r == true) {
             return true;
         } else {

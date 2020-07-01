@@ -85,6 +85,18 @@
             }
         }
 
+        public static function UploadSlide($file){
+            // $imgFormat = explode('.',$file['name']);
+            // $img = uniqid().'.'.$imgFormat[count($imgFormat) - 1];
+            if(move_uploaded_file($file['tmp_name'],SLIDE_PATH.$file['name']))
+            {
+                return $file;
+            }else
+            {
+                return false;
+            }
+        }
+
         public static function DeleteFile($file)
         {
                 @unlink(BASE_DIR_PAINEL.'uploads/'.$file);
@@ -116,6 +128,10 @@
             {
                 $sql = MySql::Connect()->prepare($query);
                 $sql->execute($parametros);
+                $lastId = MySql::Connect()->lastInsertId();
+                $sql = MySql::Connect()->prepare("UPDATE `$nome_tabela` SET order_id = ? WHERE id = $lastId");
+                $sql->execute(array($lastId));
+
             }
 
             return $certo;
@@ -124,9 +140,9 @@
         public static function SelectAll($tabela ,$start = null ,$end = null)
         {
             if($start == null && $end == null)
-                $sql = MySql::Connect()->prepare("SELECT * FROM `$tabela`");
+                $sql = MySql::Connect()->prepare("SELECT * FROM `$tabela`ORDER BY order_id ASC");
             else
-                $sql = MySql::Connect()->prepare("SELECT * FROM `$tabela` LIMIT $start,$end");
+                $sql = MySql::Connect()->prepare("SELECT * FROM `$tabela` ORDER BY order_id ASC LIMIT $start,$end");
             $sql->execute();
             return $sql->fetchAll();
         }
@@ -146,8 +162,92 @@
         
         public static function Redirect($url)
         {
-            echo '<script>Location.href="$url"</script>'
+            echo '<script>Location.href="$url"</script>';
             die();
+        }
+
+        //method for only one register
+        
+        public static function Select($table,$id = '')
+        {
+            if($id != false)
+            {
+                $sql = MySql::Connect()->prepare("SELECT * FROM `$table` WHERE id = ?");
+                $sql->execute(array($id));
+            }else
+            {
+                $sql = MySql::Connect()->prepare("SELECT * FROM `$table`");
+                $sql->execute(array());
+            }
+            return $sql->fetch();
+        }
+
+        public static function Update($arr,$single = false)
+        {
+			$certo = true;
+			$first = false;
+			$nome_tabela = $arr['nome_tabela'];
+
+			$query = "UPDATE `$nome_tabela` SET ";
+			foreach ($arr as $key => $value) {
+				$nome = $key;
+				$valor = $value;
+				if($nome == 'action' || $nome == 'nome_tabela' || $nome == 'id')
+					continue;
+				if($value == ''){
+					$certo = false;
+					break;
+				}
+				
+				if($first == false){
+					$first = true;
+					$query.="$nome=?";
+				}
+				else{
+					$query.=",$nome=?";
+				}
+
+				$parametros[] = $value;
+			}
+
+			if($certo == true){
+				if($single == false){
+					$parametros[] = $arr['id'];
+					$sql = MySql::Connect()->prepare($query.' WHERE id=?');
+					$sql->execute($parametros);
+				}else{
+					$sql = MySql::Connect()->prepare($query);
+					$sql->execute($parametros);
+				}
+			}
+			return $certo;
+        }
+        
+        public static function OrderItem($tabela,$orderType,$idItem)
+        {
+            if($orderType == 'up'){
+				$infoItemAtual = Painel::Select($tabela,$idItem);
+                $order_id = $infoItemAtual['order_id'];
+                $itemBefore = MySql::Connect()->prepare("SELECT * FROM `$tabela` WHERE order_id < $order_id ORDER BY order_id DESC LIMIT 1");
+				$itemBefore->execute();
+				if($itemBefore->rowCount() == 0)
+					return;
+				$itemBefore = $itemBefore->fetch();
+				Painel::Update(array('nome_tabela'=>$tabela,'id'=>$itemBefore['id'],'order_id'=>$infoItemAtual['order_id']));
+				Painel::Update(array('nome_tabela'=>$tabela,'id'=>$infoItemAtual['id'],'order_id'=>$itemBefore['order_id']));
+            }else if($orderType == 'down')
+            {
+                $infoItemAtual = Painel::Select($tabela,$idItem);
+                $order_id = $infoItemAtual['order_id'];
+                $itemBefore = MySql::Connect()->prepare("SELECT * FROM `$tabela` WHERE order_id > $order_id ORDER BY order_id ASC LIMIT 1");
+				$itemBefore->execute();
+				if($itemBefore->rowCount() == 0)
+					return;
+                $itemBefore = $itemBefore->fetch();
+                Painel::Update(array('nome_tabela'=>$tabela,'id'=>$itemBefore['id'],'order_id'=>$infoItemAtual['order_id']));
+                Painel::Update(array('nome_tabela'=>$tabela,'id'=>$infoItemAtual['id'],'order_id'=>$itemBefore['order_id']));
+				
+            }
         }
     }
 

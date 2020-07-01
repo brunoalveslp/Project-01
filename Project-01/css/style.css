@@ -49,6 +49,11 @@ img {
 }
 /*styles*/
 
+.sign {
+    position: absolute;
+    margin: -10px 0;
+}
+
 .succed {
     text-align: center;
     font-size: 15px;
@@ -299,10 +304,11 @@ section.main-banner form {
 }
 
 .author-name {
+    font-size: 18px;
     font-style: italic;
     font-weight: 400;
     padding: 10px 0;
-    color: rgb(5, 174, 204);
+    color: rgb(162, 241, 255);
 }
 
 .depositions ul li {

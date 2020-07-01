@@ -2,6 +2,9 @@
 <?php include('config.php'); 
     Site::UpdateUsers();
     Site::Counter();
+    $infoSite = MySql::Connect()->prepare("SELECT * FROM `tb_site_config`");
+    $infoSite->execute();
+    $infoSite = $infoSite->fetch();
 
     $url = isset($_GET['url']) ? $_GET['url'] : 'home';
 ?>
@@ -20,7 +23,7 @@
     <?php } ?>
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet"> 
-    <title>Project-01</title>
+    <title><?php echo $infoSite['titulo']; ?></title>
 </head>
 <body>
         <div class="succed"><p>Enviado com Sucesso!</p></div>
@@ -29,10 +32,12 @@
             <img src="<?php echo INCLUDE_PATH;?>images/ajax-loader.gif">
         </div>
     <header>
-        <div class="logo"><a href="<?php echo INCLUDE_PATH;?>">Logomarca</a></div>
+        <div class="logo"><a href="<?php echo INCLUDE_PATH;?>"><?php echo $infoSite['titulo']; ?></a></div>
             <nav class="desktop">
 
             <?php 
+
+            
             switch($url){
 
             case 'about':
@@ -50,6 +55,7 @@
                     <li><a href="<?php echo INCLUDE_PATH;?>about">Sobre</a></li>
                     <li><a href="<?php echo INCLUDE_PATH;?>services">Serviços</a></li>
                     <li><a href="<?php echo INCLUDE_PATH;?>contact">Contato</a></li>
+                    <li><a class="sign" href="<?php echo INCLUDE_PATH_PAINEL; ?>">Entrar</a></li>
                 </ul>
             </nav><!--header desltop-->
         
@@ -60,13 +66,13 @@
                     <li><a href="<?php echo INCLUDE_PATH;?>about">Sobre</a></li>
                     <li><a href="<?php echo INCLUDE_PATH;?>services">Serviços</a></li>
                     <li><a href="<?php echo INCLUDE_PATH;?>contact">Contato</a></li>
+                    <li><a class="sign" href="<?php echo INCLUDE_PATH_PAINEL; ?>">Entrar</a></li>
                 </ul>
             </nav><!--header mobile-->
         
     </header>
     
     <?php 
-        
         // $url  = $_SERVER["PHP_SELF"];
         // $path = explode("/", $url); 
         // $last = end($path);
