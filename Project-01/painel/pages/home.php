@@ -1,7 +1,7 @@
 <?php
-	$usersOnline = Painel::ListUsers();
+	$usersOnline = Painel::listUsers();
 
-	$Visits = MySql::Connect()->prepare("SELECT * FROM `tb_admin_visitas`");
+	$Visits = MySql::connect()->prepare("SELECT * FROM `tb_admin_visitas`");
 	$Visits->execute();
 	$Visits = $Visits->rowCount();
 
@@ -84,7 +84,7 @@
 		</div><!--row-->
 
 		<?php
-			$usuariosPainel = MySql::Connect()->prepare("SELECT * FROM `tb_admin_users`");
+			$usuariosPainel = MySql::connect()->prepare("SELECT * FROM `tb_admin_users`");
 			$usuariosPainel->execute();
 			$usuariosPainel = $usuariosPainel->fetchAll();
 			foreach ($usuariosPainel as $key => $value) {
@@ -95,7 +95,7 @@
 				<span><?php echo $value['user'] ?></span>
 			</div><!--col-->
 			<div class="col">
-				<span><?php echo Cargo($value['cargo']); ?></span>
+				<span><?php echo cargo($value['cargo']); ?></span>
 			</div><!--col-->
 			<div class="clear"></div>
 		</div><!--row-->

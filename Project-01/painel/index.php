@@ -1,6 +1,6 @@
 <?php 
     include('../config.php');
-    if(painel::login() == false)
+    if(painel::Login() == false)
      {
          include('login.php');
      } else

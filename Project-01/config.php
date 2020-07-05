@@ -17,7 +17,6 @@
     const INCLUDE_PATH_PAINEL = INCLUDE_PATH.'painel/';
 
     const BASE_DIR_PAINEL = __DIR__.'/painel/';
-    const SLIDE_PATH = INCLUDE_PATH.'images/';
 
     //database connection
     const HOST = 'localhost';
@@ -30,13 +29,13 @@
 
     //funcoes painel
 
-    function Cargo($cargo)
+    function cargo($cargo)
     {
         $permition = array('0'=>'Normal','1'=>'Sub-Administrador','2'=>'Administrador');
         return $permition[$cargo];
     }
 
-    function SelectedMenu($par)
+    function selectedMenu($par)
     {
         $url = explode('/',@$_GET['url'])[0];
         if($url == $par)
@@ -45,7 +44,7 @@
         }
     }
 
-    function VerifyPermition($per)
+    function verifyPermition($per)
     {
         if($_SESSION['cargo'] <= $per)
         {
@@ -56,7 +55,7 @@
         }
     }
 
-    function PermitionPage($per)
+    function permitionPage($per)
     {
         if($_SESSION['cargo'] >= $per)
         {

@@ -3,7 +3,7 @@
     {
         $user = $_COOKIE['user'];
         $password = $_COOKIE['passwors'];
-        $sql = Mysql::Connect()->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? AND password = ?");
+        $sql = Mysql::connect()->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? AND password = ?");
         $sql->execute(array($user,$password));
         if($sql->rowCount() == 1)
         {
@@ -26,8 +26,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Control Painel</title>
-    <link rel="stylesheet" href="<?php echo INCLUDE_PATH_PAINEL; ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo INCLUDE_PATH; ?>css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?php echo INCLUDE_PATH_PAINEL ?>css/style.css">
+    <link rel="stylesheet" href="<?php echo INCLUDE_PATH ?>css/font-awesome.min.css">
 </head>
 <body>
 
@@ -38,7 +38,7 @@
             {
                 $user = $_POST['username'];
                 $password = $_POST['password'];
-                $sql = Mysql::Connect()->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? AND password = ?");
+                $sql = Mysql::connect()->prepare("SELECT * FROM `tb_admin_users` WHERE user = ? AND password = ?");
                 $sql->execute(array($user,$password));
                 if($sql->rowCount() == 1)
                 {

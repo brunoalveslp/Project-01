@@ -1,21 +1,21 @@
 <?php
 	if(isset($_GET['excluir'])){
 		$idExcluir = intval($_GET['excluir']);
-		$selectImagem = MySql::Connect()->prepare("SELECT slide FROM `tb_site_slides` WHERE id = ?");
+		$selectImagem = MySql::connect()->prepare("SELECT slide FROM `tb_site_slides` WHERE id = ?");
 		$selectImagem->execute(array($_GET['excluir']));
 
 		$imagem = $selectImagem->fetch()['slide'];
-		Painel::DeleteFile($imagem);
-		Painel::Delete('tb_site_slides',$idExcluir);
+		Painel::deleteFile($imagem);
+		Painel::delete('tb_site_slides',$idExcluir);
 		header('refresh:o.1');
 	}else if(isset($_GET['order']) && isset($_GET['id'])){
-		Painel::OrderItem('tb_site_slides',$_GET['order'],$_GET['id']);
+		Painel::orderItem('tb_site_slides',$_GET['order'],$_GET['id']);
 	}
 
 	$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 	$porPagina = 4;
 	
-	$slides = Painel::SelectAll('tb_site_slides',($paginaAtual - 1) * $porPagina,$porPagina);
+	$slides = Painel::selectAll('tb_site_slides',($paginaAtual - 1) * $porPagina,$porPagina);
 	
 ?>
 <div class="box-content">

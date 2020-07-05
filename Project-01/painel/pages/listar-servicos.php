@@ -1,16 +1,16 @@
 <?php
 	if(isset($_GET['excluir'])){
 		$idExcluir = intval($_GET['excluir']);
-		Painel::Delete('tb_site_servicos',$idExcluir);
-		Painel::Redirect(INCLUDE_PATH_PAINEL.'listar-servicos');
+		Painel::delete('tb_site_servicos',$idExcluir);
+		Painel::redirect(INCLUDE_PATH_PAINEL.'listar-servicos');
 	}else if(isset($_GET['order']) && isset($_GET['id'])){
-		Painel::OrderItem('tb_site_servicos',$_GET['order'],$_GET['id']);
+		Painel::orderItem('tb_site_servicos',$_GET['order'],$_GET['id']);
 	}
 
 	$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
-	$porPagina = 4;
+	$porPagina = 10;
 	
-	$servicos = Painel::SelectAll('tb_site_servicos',($paginaAtual - 1) * $porPagina,$porPagina);
+	$servicos = Painel::selectAll('tb_site_servicos',($paginaAtual - 1) * $porPagina,$porPagina);
 	
 ?>
 <div class="box-content">
@@ -43,7 +43,7 @@
 
 	<div class="paginacao">
 		<?php
-			$totalPaginas = ceil(count(Painel::SelectAll('tb_site_servicos')) / $porPagina);
+			$totalPaginas = ceil(count(Painel::selectAll('tb_site_servicos')) / $porPagina);
 
 			for($i = 1; $i <= $totalPaginas; $i++){
 				if($i == $paginaAtual)

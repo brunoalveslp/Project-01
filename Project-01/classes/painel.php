@@ -14,7 +14,7 @@
 			header('Location: '.INCLUDE_PATH_PAINEL);
         }
         
-        public static function LoadPage()
+        public static function loadPage()
         {
             if(isset($_GET['url']))
             {
@@ -32,21 +32,21 @@
             }
         }
 
-        public static function ListUsers()
+        public static function listUsers()
         {
-            self::CleanUsers();
-            $sql = MySql::Connect()->prepare("SELECT * FROM `tb_admin_online`");
+            self::cleanUsers();
+            $sql = MySql::connect()->prepare("SELECT * FROM `tb_admin_online`");
             $sql->execute();
             return $sql->fetchAll();
         }
 
-        public static function CleanUsers()
+        public static function cleanUsers()
         {
             $time = date('y-m-d H:i:s'); 
-            $sql = MySql::Connect()->exec("DELETE FROM `tb_admin_online` WHERE ultima_acao < '$time' - INTERVAL 1 MINUTE");
+            $sql = MySql::connect()->exec("DELETE FROM `tb_admin_online` WHERE ultima_acao < '$time' - INTERVAL 1 MINUTE");
         }
 
-        public static function Alert($aswer,$msg)
+        public static function alert($aswer,$msg)
         {
             if($aswer == 'success')
             {
@@ -57,7 +57,7 @@
             }
         }
 
-        public static function ValidateImg($image)
+        public static function validateImg($image)
         {
 			if($image['type'] == 'image/jpeg' ||
 				$image['type'] == 'image/jpg' ||
@@ -73,7 +73,7 @@
 			}
 		}
 
-        public static function UploadFile($file){
+        public static function uploadFile($file){
             // $imgFormat = explode('.',$file['name']);
             // $img = uniqid().'.'.$imgFormat[count($imgFormat) - 1];
             if(move_uploaded_file($file['tmp_name'],BASE_DIR_PAINEL.'uploads/'.$file['name']))
@@ -85,10 +85,10 @@
             }
         }
 
-        public static function UploadSlide($file){
+        public static function uploadSlide($file){
             // $imgFormat = explode('.',$file['name']);
             // $img = uniqid().'.'.$imgFormat[count($imgFormat) - 1];
-            if(move_uploaded_file($file['tmp_name'],SLIDE_PATH.$file['name']))
+            if(move_uploaded_file($file['tmp_name'],BASE_DIR_PAINEL.'/uploads/'.$file['name']))
             {
                 return $file;
             }else
@@ -97,12 +97,12 @@
             }
         }
 
-        public static function DeleteFile($file)
+        public static function deleteFile($file)
         {
                 @unlink(BASE_DIR_PAINEL.'uploads/'.$file);
         }
         
-        public static function Insert($arr)
+        public static function insert($arr)
         {
             $certo = true;
             $nome_tabela = $arr['nome_tabela'];
@@ -126,10 +126,10 @@
             $query.=")";
             if($certo == true)
             {
-                $sql = MySql::Connect()->prepare($query);
+                $sql = MySql::connect()->prepare($query);
                 $sql->execute($parametros);
-                $lastId = MySql::Connect()->lastInsertId();
-                $sql = MySql::Connect()->prepare("UPDATE `$nome_tabela` SET order_id = ? WHERE id = $lastId");
+                $lastId = MySql::connect()->lastInsertId();
+                $sql = MySql::connect()->prepare("UPDATE `$nome_tabela` SET order_id = ? WHERE id = $lastId");
                 $sql->execute(array($lastId));
 
             }
@@ -137,30 +137,30 @@
             return $certo;
         }
 
-        public static function SelectAll($tabela ,$start = null ,$end = null)
+        public static function selectAll($tabela ,$start = null ,$end = null)
         {
             if($start == null && $end == null)
-                $sql = MySql::Connect()->prepare("SELECT * FROM `$tabela`ORDER BY order_id ASC");
+                $sql = MySql::connect()->prepare("SELECT * FROM `$tabela`ORDER BY order_id ASC");
             else
-                $sql = MySql::Connect()->prepare("SELECT * FROM `$tabela` ORDER BY order_id ASC LIMIT $start,$end");
+                $sql = MySql::connect()->prepare("SELECT * FROM `$tabela` ORDER BY order_id ASC LIMIT $start,$end");
             $sql->execute();
             return $sql->fetchAll();
         }
         
-        public static function Delete($table,$id=false)
+        public static function delete($table,$id=false)
         {
             if($id==false)
             {
-                $sql = MySql::Connect()->prepare("DELETE FROM `$table`");
+                $sql = MySql::connect()->prepare("DELETE FROM `$table`");
             }else
             {
-                $sql = MySql::Connect()->prepare("DELETE FROM `$table` WHERE id =$id");
+                $sql = MySql::connect()->prepare("DELETE FROM `$table` WHERE id =$id");
             }
 
             $sql->execute();
         }
         
-        public static function Redirect($url)
+        public static function redirect($url)
         {
             echo '<script>Location.href="$url"</script>';
             die();
@@ -168,21 +168,21 @@
 
         //method for only one register
         
-        public static function Select($table,$id = '')
+        public static function select($table,$id = '')
         {
             if($id != false)
             {
-                $sql = MySql::Connect()->prepare("SELECT * FROM `$table` WHERE id = ?");
+                $sql = MySql::connect()->prepare("SELECT * FROM `$table` WHERE id = ?");
                 $sql->execute(array($id));
             }else
             {
-                $sql = MySql::Connect()->prepare("SELECT * FROM `$table`");
+                $sql = MySql::connect()->prepare("SELECT * FROM `$table`");
                 $sql->execute(array());
             }
             return $sql->fetch();
         }
 
-        public static function Update($arr,$single = false)
+        public static function update($arr,$single = false)
         {
 			$certo = true;
 			$first = false;
@@ -213,39 +213,39 @@
 			if($certo == true){
 				if($single == false){
 					$parametros[] = $arr['id'];
-					$sql = MySql::Connect()->prepare($query.' WHERE id=?');
+					$sql = MySql::connect()->prepare($query.' WHERE id=?');
 					$sql->execute($parametros);
 				}else{
-					$sql = MySql::Connect()->prepare($query);
+					$sql = MySql::connect()->prepare($query);
 					$sql->execute($parametros);
 				}
 			}
 			return $certo;
         }
         
-        public static function OrderItem($tabela,$orderType,$idItem)
+        public static function orderItem($tabela,$orderType,$idItem)
         {
             if($orderType == 'up'){
-				$infoItemAtual = Painel::Select($tabela,$idItem);
+				$infoItemAtual = Painel::select($tabela,$idItem);
                 $order_id = $infoItemAtual['order_id'];
-                $itemBefore = MySql::Connect()->prepare("SELECT * FROM `$tabela` WHERE order_id < $order_id ORDER BY order_id DESC LIMIT 1");
+                $itemBefore = MySql::connect()->prepare("SELECT * FROM `$tabela` WHERE order_id < $order_id ORDER BY order_id DESC LIMIT 1");
 				$itemBefore->execute();
 				if($itemBefore->rowCount() == 0)
 					return;
 				$itemBefore = $itemBefore->fetch();
-				Painel::Update(array('nome_tabela'=>$tabela,'id'=>$itemBefore['id'],'order_id'=>$infoItemAtual['order_id']));
-				Painel::Update(array('nome_tabela'=>$tabela,'id'=>$infoItemAtual['id'],'order_id'=>$itemBefore['order_id']));
+				Painel::update(array('nome_tabela'=>$tabela,'id'=>$itemBefore['id'],'order_id'=>$infoItemAtual['order_id']));
+				Painel::update(array('nome_tabela'=>$tabela,'id'=>$infoItemAtual['id'],'order_id'=>$itemBefore['order_id']));
             }else if($orderType == 'down')
             {
-                $infoItemAtual = Painel::Select($tabela,$idItem);
+                $infoItemAtual = Painel::select($tabela,$idItem);
                 $order_id = $infoItemAtual['order_id'];
-                $itemBefore = MySql::Connect()->prepare("SELECT * FROM `$tabela` WHERE order_id > $order_id ORDER BY order_id ASC LIMIT 1");
+                $itemBefore = MySql::connect()->prepare("SELECT * FROM `$tabela` WHERE order_id > $order_id ORDER BY order_id ASC LIMIT 1");
 				$itemBefore->execute();
 				if($itemBefore->rowCount() == 0)
 					return;
                 $itemBefore = $itemBefore->fetch();
-                Painel::Update(array('nome_tabela'=>$tabela,'id'=>$itemBefore['id'],'order_id'=>$infoItemAtual['order_id']));
-                Painel::Update(array('nome_tabela'=>$tabela,'id'=>$infoItemAtual['id'],'order_id'=>$itemBefore['order_id']));
+                Painel::update(array('nome_tabela'=>$tabela,'id'=>$itemBefore['id'],'order_id'=>$infoItemAtual['order_id']));
+                Painel::update(array('nome_tabela'=>$tabela,'id'=>$infoItemAtual['id'],'order_id'=>$itemBefore['order_id']));
 				
             }
         }

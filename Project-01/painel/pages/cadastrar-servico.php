@@ -6,10 +6,10 @@
 		<?php
 			if(isset($_POST['action'])){
 			
-				if(Painel::Insert($_POST)){
-					Painel::Alert('success','O cadastro do serviço foi realizado com sucesso!');
+				if(Painel::insert($_POST)){
+					Painel::alert('success','O cadastro do serviço foi realizado com sucesso!');
 				}else{
-					Painel::Alert('error','Campos vázios não são permitidos!');
+					Painel::alert('error','Campos vázios não são permitidos!');
 				}
 			
 			}

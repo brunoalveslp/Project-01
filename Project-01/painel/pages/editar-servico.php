@@ -1,9 +1,9 @@
 <?php 
 	if(isset($_GET['id'])){
 		$id = (int)$_GET['id'];
-		$servico = Painel::Select('tb_site_servicos',$id);
+		$servico = Painel::select('tb_site_servicos',$id);
 	}else{
-		Painel::Alert('erro','Você precisa passar o parametro ID.');
+		Painel::alert('erro','Você precisa passar o parametro ID.');
 		die();
 	}
  ?>
@@ -14,12 +14,12 @@
 
 		<?php
 			if(isset($_POST['action'])){
-				if(Painel::Update($_POST)){
-					Painel::Alert('success','O Serviço foi editado com sucesso!');
+				if(Painel::update($_POST)){
+					Painel::alert('success','O Serviço foi editado com sucesso!');
 					echo "<script>alert('O servico foi editado com sucesso!')</script>";
 					header("Refresh:0.1");
 				}else{
-					Painel::Alert('error','Campos vázios não são permitidos.');
+					Painel::alert('error','Campos vázios não são permitidos.');
 				}
 			}
 		?>

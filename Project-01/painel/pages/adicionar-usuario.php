@@ -1,5 +1,5 @@
 <?php
-	PermitionPage(2);
+	permitionPage(2);
 	
 ?>
 <div class="box-content">
@@ -16,26 +16,26 @@
 				$cargo = $_POST['cargo'];
 
 				if($login == ''){
-					Painel::Alert('error','O login está vázio!');
+					Painel::alert('error','O login está vázio!');
 				}else if($nome == ''){
-					Painel::Alert('error','O nome está vázio!');
+					Painel::alert('error','O nome está vázio!');
 				}else if($senha == ''){
-					Painel::Alert('error','A senha está vázia!');
+					Painel::alert('error','A senha está vázia!');
 				}else if($cargo == ''){
-					Painel::Alert('error','O cargo precisa estar selecionado!');
+					Painel::alert('error','O cargo precisa estar selecionado!');
 				}else{
 					//Podemos cadastrar!
 					if($cargo >= $_SESSION['cargo']){
-						Painel::Alert('erro','Você precisa selecionar um cargo menor que o seu!');
-					}else if(Painel::ValidateImg($imagem) == false || $imagem == ''){
-						Painel::Alert('erro','O formato especificado não está correto!');
-					}else if(User::UserExists($login)){
-						Painel::Alert('erro','O login já existe, selecione outro por favor!');
+						Painel::alert('erro','Você precisa selecionar um cargo menor que o seu!');
+					}else if(Painel::validateImg($imagem) == false || $imagem == ''){
+						Painel::alert('erro','O formato especificado não está correto!');
+					}else if(User::userExists($login)){
+						Painel::alert('erro','O login já existe, selecione outro por favor!');
 					}else{
 						//Apenas cadastrar no banco de dados!
-						$imagem = Painel::UploadFile($imagem);
-						User::NewUser($login,$senha,$imagem,$nome,$cargo);
-						Painel::Alert('sucesso','O cadastro do usuário '.$login.' foi feito com sucesso!');
+						$imagem = Painel::uploadFile($imagem);
+						User::newUser($login,$senha,$imagem,$nome,$cargo);
+						Painel::alert('sucesso','O cadastro do usuário '.$login.' foi feito com sucesso!');
 					}
 				}
 				

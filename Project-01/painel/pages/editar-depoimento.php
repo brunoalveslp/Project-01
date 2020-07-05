@@ -1,7 +1,7 @@
 <?php 
 	if(isset($_GET['id'])){
 		$id = (int)$_GET['id'];
-		$depoimento = Painel::Select('tb_site_depoimentos',$id);
+		$depoimento = Painel::select('tb_site_depoimentos',$id);
 	}else{
 		Painel::alert('erro','Você precisa passar o parametro ID.');
 		die();
@@ -14,7 +14,7 @@
 
 		<?php
 			if(isset($_POST['action'])){
-				if(Painel::Update($_POST)){
+				if(Painel::update($_POST)){
 					Painel::alert('success','O depoimento foi editado com sucesso!');
 					echo "<script>alert('O depoimento foi editado com sucesso!')</script>";
 					header("Refresh:0.1");

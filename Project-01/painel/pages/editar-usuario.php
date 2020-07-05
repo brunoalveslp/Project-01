@@ -14,18 +14,18 @@
 				if($img['name'] != '')
 				{
 					//if the image is a valid image
-					if(Painel::ValidateImg($img))
+					if(Painel::validateImg($img))
 					{
 						$_SESSION['img']=$img['name'];
-						Painel::DeleteFile($curImg);
-						Painel::UploadFile($img);
-						if(User::RefreshUser($name,$pass,$img))
+						Painel::deleteFile($curImg);
+						Painel::uploadFile($img);
+						if(User::refreshUser($name,$pass,$img))
 						{
-							Painel::Alert('success','Edição Realizada Com Sucesso');
+							Painel::alert('success','Edição Realizada Com Sucesso');
 							header('refresh: 1');
 						} else
 						{
-							Painel::Alert('error','Formato Invalido!');
+							Painel::alert('error','Formato Invalido!');
 						}
 					}
 					
@@ -33,12 +33,12 @@
 				} else 
 				{
 					$img = $curImg;
-					if(User::RefreshUser($name,$pass,$img))
+					if(User::refreshUser($name,$pass,$img))
 					{
-						Painel::Alert('success','Edição Realizada Com Sucesso!');
+						Painel::alert('success','Edição Realizada Com Sucesso!');
 					} else
 					{
-						Painel::Alert('error','Ocorreu um erro durante a Edição!');
+						Painel::alert('error','Ocorreu um erro durante a Edição!');
 					}
 				}
 				

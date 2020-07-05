@@ -1,12 +1,5 @@
-<!-- <?php 
-    // $infoSite = MySql::Connect()->prepare("SELECT * FROM `tb_site_config`");
-    // $infoSite->execute();
-    // $infoSite = $infoSite->fetch();
-
-?> -->
 
 <section class="main-banner">
-
     <div class="banner-slider" style="background-image: url('<?php echo INCLUDE_PATH;?>images/city1.jpg');"></div>
     <div class="banner-slider" style="background-image: url('<?php echo INCLUDE_PATH;?>images/city2.jpg');"></div>
     <div class="banner-slider" style="background-image: url('<?php echo INCLUDE_PATH;?>images/city3.jpg');"></div>
@@ -85,7 +78,7 @@
                 <h2>Depoimentos dos Nossos Clientes</h2>
 
                 <?php 
-                    $sql = MySql::Connect()->prepare("SELECT * FROM `tb_site_depoimentos` ORDER BY order_id LIMIT 3");
+                    $sql = MySql::connect()->prepare("SELECT * FROM `tb_site_depoimentos` ORDER BY order_id LIMIT 3");
                     $sql->execute();
                     $deps = $sql->fetchAll();
                     foreach ($deps as $key => $value) {
@@ -101,7 +94,7 @@
             <div id="services" class="w50 right">
                 <h2>Serviços</h2>
                 <?php 
-                    $sql = MySql::Connect()->prepare("SELECT * FROM `tb_site_servicos` ORDER BY order_id LIMIT 3");
+                    $sql = MySql::connect()->prepare("SELECT * FROM `tb_site_servicos` ORDER BY order_id LIMIT 5");
                     $sql->execute();
                     $serv = $sql->fetchAll();
                     foreach ($serv as $key => $value) {

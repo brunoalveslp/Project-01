@@ -1,8 +1,8 @@
 
 <?php include('config.php'); 
-    Site::UpdateUsers();
-    Site::Counter();
-    $infoSite = MySql::Connect()->prepare("SELECT * FROM `tb_site_config`");
+    Site::updateUsers();
+    Site::counter();
+    $infoSite = MySql::connect()->prepare("SELECT * FROM `tb_site_config`");
     $infoSite->execute();
     $infoSite = $infoSite->fetch();
 
@@ -29,10 +29,10 @@
         <div class="succed"><p>Enviado com Sucesso!</p></div>
         <div class="Erro"><p>Ocorreu algo de Errado!</p></div>
         <div class="loading">
-            <img src="<?php echo INCLUDE_PATH;?>images/ajax-loader.gif">
+            <img src="<?php echo INCLUDE_PATH?>images/ajax-loader.gif">
         </div>
     <header>
-        <div class="logo"><a href="<?php echo INCLUDE_PATH;?>"><?php echo $infoSite['titulo']; ?></a></div>
+        <div class="logo"><a href="<?php echo INCLUDE_PATH?>"><?php echo $infoSite['titulo']; ?></a></div>
             <nav class="desktop">
 
             <?php 
@@ -51,22 +51,22 @@
             ?>
                 
                 <ul>
-                    <li><a href="<?php echo INCLUDE_PATH;?>">Home</a></li>
-                    <li><a href="<?php echo INCLUDE_PATH;?>about">Sobre</a></li>
-                    <li><a href="<?php echo INCLUDE_PATH;?>services">Serviços</a></li>
-                    <li><a href="<?php echo INCLUDE_PATH;?>contact">Contato</a></li>
-                    <li><a class="sign" href="<?php echo INCLUDE_PATH_PAINEL; ?>">Entrar</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>">Home</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>about">Sobre</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>services">Serviços</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>contact">Contato</a></li>
+                    <li><a class="sign" href="<?php echo INCLUDE_PATH_PAINEL ?>">Entrar</a></li>
                 </ul>
             </nav><!--header desltop-->
         
             <nav class="mobile">
                 <div class="mobile-menu"><i class="fa fa-bars" aria-hidden="true"></i></div>
                 <ul>
-                    <li><a href="<?php echo INCLUDE_PATH;?>home">Home</a></li>
-                    <li><a href="<?php echo INCLUDE_PATH;?>about">Sobre</a></li>
-                    <li><a href="<?php echo INCLUDE_PATH;?>services">Serviços</a></li>
-                    <li><a href="<?php echo INCLUDE_PATH;?>contact">Contato</a></li>
-                    <li><a class="sign" href="<?php echo INCLUDE_PATH_PAINEL; ?>">Entrar</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>home">Home</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>about">Sobre</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>services">Serviços</a></li>
+                    <li><a href="<?php echo INCLUDE_PATH?>contact">Contato</a></li>
+                    <li><a class="sign" href="<?php echo INCLUDE_PATH_PAINEL ?>">Entrar</a></li>
                 </ul>
             </nav><!--header mobile-->
         
@@ -98,7 +98,7 @@
     <script src="js/jquery-3.5.1.min.js"></script>
     <script src="js/script.js"></script>
     <script src="js/slider.js"></script>
-    <script src="<?php echo INCLUDE_PATH;?>js/forms.js"></script>
+    <script src="<?php echo INCLUDE_PATH?>js/forms.js"></script>
 
     
     

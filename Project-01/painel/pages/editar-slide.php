@@ -1,7 +1,7 @@
 <?php
 	if(isset($_GET['id'])){
 		$id = (int)$_GET['id'];
-		$slide = Painel::Select('tb_site_slides',$id);
+		$slide = Painel::select('tb_site_slides',$id);
 	}else{
 		Painel::alert('error','Você precisa passar o parametro ID.');
 		die();
@@ -23,22 +23,22 @@
 				if($imagem['name'] != ''){
 
 					//Existe o upload de imagem.
-					if(Painel::ValidateImg($imagem)){
-						Painel::DeleteFile($imagem_atual);
-						$imagem = Painel::UploadSlide($imagem);
+					if(Painel::validateImg($imagem)){
+						Painel::deleteFile($imagem_atual);
+						$imagem = Painel::uploadSlide($imagem);
 						$arr = ['nome'=>$nome,'slide'=>$imagem['name'],'id'=>$id,'nome_tabela'=>'tb_site_slides'];
-						Painel::Update($arr);
-						$slide = Painel::Select('tb_site_slides',$id);
-						Painel::Alert('success','O Slide foi editado junto com a imagem!');
+						Painel::update($arr);
+						$slide = Painel::select('tb_site_slides',$id);
+						Painel::alert('success','O Slide foi editado junto com a imagem!');
 					}else{
-						Painel::Alert('error','O formato da imagem não é válido');
+						Painel::alert('error','O formato da imagem não é válido');
 					}
 				}else{
 					$imagem = $imagem_atual;
-					$arr = ['nome'=>$nome,'slide'=>$imagem['name'],'id'=>$id,'nome_tabela'=>'tb_site_slides'];
-					Painel::Update($arr);
-					$slide = Painel::Select('tb_site_slides',$id);
-					Painel::Alert('success','O Slide foi editado com sucesso!');
+					$arr = ['nome'=>$nome,'slide'=>$imagem,'id'=>$id,'nome_tabela'=>'tb_site_slides'];
+					Painel::update($arr);
+					$slide = Painel::select('tb_site_slides',$id);
+					Painel::alert('success','O Slide foi editado com sucesso!');
 				}
 
 			}

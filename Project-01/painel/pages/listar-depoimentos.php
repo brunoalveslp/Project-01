@@ -10,7 +10,7 @@
 	$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 	$porPagina = 10;
 	
-	$depoimentos = Painel::SelectAll('tb_site_depoimentos',($paginaAtual - 1) * $porPagina,$porPagina);
+	$depoimentos = Painel::selectAll('tb_site_depoimentos',($paginaAtual - 1) * $porPagina,$porPagina);
 	
 ?>
 <div class="box-content">

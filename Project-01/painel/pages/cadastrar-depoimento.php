@@ -8,10 +8,10 @@
 			{
 				if(Painel::Insert($_POST))
 				{
-					Painel::Alert('success','O cadastro do depoimento foi realizado com sucesso!');
+					Painel::alert('success','O cadastro do depoimento foi realizado com sucesso!');
 				}else
 				{
-					Painel::Alert('error','Campos vázios não são permitidos!');
+					Painel::alert('error','Campos vázios não são permitidos!');
 				}
 			}
 		?>

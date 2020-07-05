@@ -9,20 +9,20 @@
 				$nome = $_POST['nome'];
 				$imagem = $_FILES['imagem'];
 				if($nome == ''){
-					Painel::Alert('error','O campo nome não pode ficar vázio!');
+					Painel::alert('error','O campo nome não pode ficar vázio!');
 				}else{
 					//Podemos cadastrar!
-					if(Painel::ValidateImg($imagem) == false){
-						Painel::Alert('error','O formato especificado não está correto!');
+					if(Painel::validateImg($imagem) == false){
+						Painel::alert('error','O formato especificado não está correto!');
 					}else{
 						//Apenas cadastrar no banco de dados!
 						//include('../classes/lib/WideImage.php');
-						$imagem = Painel::UploadSlide($imagem);
+						$imagem = Painel::uploadSlide($imagem);
 						//WideImage::load('uploads/'.$imagem)->resize(100)->rotate(180)->saveToFile('uploads/'.$imagem);
 						$orderid = '0';
 						$arr = ['nome'=>"$nome",'slide'=>$imagem['name'],'order_id'=>$orderid,'nome_tabela'=>'tb_site_slides'];
-						Painel::Insert($arr);
-						Painel::Alert('success','O cadastro do slide foi realizado com sucesso!');
+						Painel::unsert($arr);
+						Painel::alert('success','O cadastro do slide foi realizado com sucesso!');
 					}
 				}
 				

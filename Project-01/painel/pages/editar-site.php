@@ -1,5 +1,5 @@
 <?php 
-	$site = Painel::Select('tb_site_config',false);
+	$site = Painel::select('tb_site_config',false);
 ?>
 
 <div class="box-content">
@@ -9,11 +9,11 @@
 
 		<?php
 			if(isset($_POST['action'])){
-				if(Painel::Update($_POST,true)){
-					Painel::Alert('success','O site foi editado com sucesso!');
+				if(Painel::update($_POST,true)){
+					Painel::alert('success','O site foi editado com sucesso!');
 					$site = Painel::Select('tb_site_config',false);
 				}else{
-					Painel::Alert('error','Campos vázios não são permitidos.');
+					Painel::alert('error','Campos vázios não são permitidos.');
 				}
 			}
 		?>
